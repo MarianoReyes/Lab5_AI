@@ -4,6 +4,10 @@ import csv
 import random
 import math
 import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
+from sklearn.metrics import accuracy_score
+from sklearn.model_selection import train_test_split
+from sklearn.datasets import load_iris
 
 ''' KNN SIN LIBRERIAS'''
 
@@ -108,7 +112,7 @@ print(
 predictions = k_nearest_neighbors(training_set, test_set, 3)
 actual = [row[-1] for row in test_set]
 accuracy = accuracy_metric(actual, predictions)
-print('\nAccuracy sin libs:', accuracy)
+print('\Presición sin librerías:', accuracy)
 
 # Obtener las etiquetas de predicción para el conjunto de prueba
 predictions = k_nearest_neighbors(training_set, test_set, 3)
@@ -134,3 +138,50 @@ plt.show()
 
 
 ''' KNN CON LIBRERIAS'''
+# Cargar el dataset
+data = pd.read_csv('dataset_phishing_cleaned.csv', index_col=0)
+
+# Dividir en conjunto de entrenamiento y prueba
+X_train, X_test, y_train, y_test = train_test_split(
+    data.iloc[:, :-1], data.iloc[:, -1], test_size=0.2, random_state=42)
+
+
+def euclidean_distance(x1, x2):
+    return np.sqrt(np.sum((x1 - x2)**2))
+
+
+class KNN:
+    def __init__(self, k=3):
+        self.k = k
+
+    def fit(self, X, y):
+        self.X_train = X
+        self.y_train = y
+
+    def predict(self, X):
+        predicted_labels = [self._predict(x) for x in X.to_numpy()]
+        return np.array(predicted_labels)
+
+    def _predict(self, x):
+        distances = [euclidean_distance(x, x_train)
+                     for x_train in self.X_train.to_numpy()]
+        k_indices = np.argsort(distances)[:self.k]
+        k_nearest_labels = [self.y_train.iloc[i] for i in k_indices]
+        most_common_label = max(set(k_nearest_labels),
+                                key=k_nearest_labels.count)
+        return most_common_label
+
+
+knn = KNN(k=3)
+knn.fit(X_train, y_train)
+y_pred = knn.predict(X_test)
+
+accuracy = accuracy_score(y_test, y_pred)
+print('Presición con librerías:', accuracy)
+
+
+plt.scatter(X_test['domain'], X_test['path'], c=y_pred)
+plt.xlabel('Dominio')
+plt.ylabel('Path')
+plt.savefig('knn_conlibs.jpg')
+plt.show()
