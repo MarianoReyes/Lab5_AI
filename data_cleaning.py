@@ -43,22 +43,16 @@ X_res, y_res = smote.fit_resample(X, y)
 data_res = pd.concat([X_res, y_res], axis=1)
 
 X = data_res.drop(columns=['status'])
+X = np.absolute(X)
 y = data_res['status']
-
-# Recursive Feature Elimination
-# print("RFE")
-# estimator = RandomForestClassifier()
-# selector = RFECV(estimator, step=1, cv=5)
-# selector.fit(X, y)
-
-# selected_cols = X.columns[selector.support_]
 
 # SelectKBest
 print("SKB")
 selector = SelectKBest(chi2, k=10)
 selector.fit(X, y)
 
-selected_cols = X.columns[selector.get_support()]
+selected_cols = X.columns[selector.get_support()].tolist()
+
 
 # guardar archivo limpiado en un archivo CSV
 data_res[selected_cols + ['status']].to_csv('dataset_phishing_cleaned.csv')
