@@ -110,4 +110,27 @@ actual = [row[-1] for row in test_set]
 accuracy = accuracy_metric(actual, predictions)
 print('\nAccuracy sin libs:', accuracy)
 
+# Obtener las etiquetas de predicción para el conjunto de prueba
+predictions = k_nearest_neighbors(training_set, test_set, 3)
+
+# Crear una lista con los valores de las características X y Y para cada punto en el conjunto de prueba
+x = [row[0] for row in test_set]
+y = [row[1] for row in test_set]
+
+# Crear una lista con las etiquetas de predicción correspondientes
+colors = ['red' if label == '1' else 'blue' for label in predictions]
+
+# Crear el gráfico de dispersión
+plt.scatter(x, y, c=colors)
+
+# Agregar etiquetas al gráfico
+plt.title('Etiquetas de predicción')
+plt.xlabel('Característica X')
+plt.ylabel('Característica Y')
+
+# Mostrar el gráfico
+plt.savefig('knn_sinlibs.jpg')
+plt.show()
+
+
 ''' KNN CON LIBRERIAS'''
