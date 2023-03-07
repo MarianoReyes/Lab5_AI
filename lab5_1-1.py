@@ -1,3 +1,7 @@
+from sklearn.metrics import confusion_matrix, accuracy_score
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.preprocessing import LabelEncoder
+import seaborn as sns
 import numpy as np
 import pandas as pd
 import csv
@@ -112,7 +116,7 @@ print(
 predictions = k_nearest_neighbors(training_set, test_set, 3)
 actual = [row[-1] for row in test_set]
 accuracy = accuracy_metric(actual, predictions)
-print('\Presición sin librerías:', accuracy)
+print('\nPresición sin librerías:', accuracy)
 
 # Obtener las etiquetas de predicción para el conjunto de prueba
 predictions = k_nearest_neighbors(training_set, test_set, 3)
@@ -124,64 +128,54 @@ y = [row[1] for row in test_set]
 # Crear una lista con las etiquetas de predicción correspondientes
 colors = ['red' if label == '1' else 'blue' for label in predictions]
 
-# Crear el gráfico de dispersión
-plt.scatter(x, y, c=colors)
 
-# Agregar etiquetas al gráfico
-plt.title('Etiquetas de predicción')
+# Crear el gráfico de dispersión
+plt.scatter(x, y, c=colors, alpha=0.5)
+
+# Crear una lista de colores para representar las predicciones de KNN
+pred_colors = ['green' if label == '1' else 'yellow' for label in predictions]
+
+# Añadir los puntos predichos al gráfico de dispersión
+plt.scatter(x, y, c=pred_colors, alpha=0.5)
+
+# Añadir las etiquetas de los ejes y el título del gráfico
 plt.xlabel('Característica X')
 plt.ylabel('Característica Y')
+plt.title('Resultados de KNN en el conjunto de datos de phishing')
 
 # Mostrar el gráfico
-plt.savefig('knn_sinlibs.jpg')
 plt.show()
 
 
 ''' KNN CON LIBRERIAS'''
 # Cargar el dataset
-data = pd.read_csv('dataset_phishing_cleaned.csv', index_col=0)
+df = pd.read_csv('dataset_phishing.csv')
+joined_columns = ["ip", "nb_qm", "ratio_digits_url", "ratio_digits_host",
+                  "shortest_word_host", "longest_word_path", "phish_hints", "google_index"]
+#joined_columns = ["ip","nb_qm","ratio_digits_url","ratio_digits_host","length_words_raw","shortest_word_host","longest_words_raw","longest_word_path","avg_word_host","avg_word_path","phish_hints","google_index"]
+df = pd.read_csv('dataset_phishing_cleaned.csv')
+joined_columns.append('status')
+df = df[joined_columns]
+le = LabelEncoder()
+df["status"] = le.fit_transform(df["status"])
 
-# Dividir en conjunto de entrenamiento y prueba
-X_train, X_test, y_train, y_test = train_test_split(
-    data.iloc[:, :-1], data.iloc[:, -1], test_size=0.2, random_state=42)
+X2 = df.iloc[:, 1:-1].values
+y2 = df.iloc[:, -1].values
+X2_entreno, X2_prueba, y2_entreno, y2_prueba = train_test_split(
+    X2, y2, test_size=0.25, random_state=0)
+clasificador = KNeighborsClassifier(n_neighbors=5, metric='minkowski', p=2)
+clasificador.fit(X2_entreno, y2_entreno)
+y2_pred = clasificador.predict(X2_prueba)
+mat2_conf = confusion_matrix(y2_prueba, y2_pred)
+print("\n", mat2_conf)
+print("\nPresición con librerías:", accuracy_score(y2_prueba, y2_pred))
 
+corr_matrix = df.corr()
+# Generar mapa de calor
+sns.heatmap(corr_matrix, cmap='magma')
 
-def euclidean_distance(x1, x2):
-    return np.sqrt(np.sum((x1 - x2)**2))
+# Ajustar tamaño de figura
+plt.figure(figsize=(4, 3))
 
-
-class KNN:
-    def __init__(self, k=3):
-        self.k = k
-
-    def fit(self, X, y):
-        self.X_train = X
-        self.y_train = y
-
-    def predict(self, X):
-        predicted_labels = [self._predict(x) for x in X.to_numpy()]
-        return np.array(predicted_labels)
-
-    def _predict(self, x):
-        distances = [euclidean_distance(x, x_train)
-                     for x_train in self.X_train.to_numpy()]
-        k_indices = np.argsort(distances)[:self.k]
-        k_nearest_labels = [self.y_train.iloc[i] for i in k_indices]
-        most_common_label = max(set(k_nearest_labels),
-                                key=k_nearest_labels.count)
-        return most_common_label
-
-
-knn = KNN(k=3)
-knn.fit(X_train, y_train)
-y_pred = knn.predict(X_test)
-
-accuracy = accuracy_score(y_test, y_pred)
-print('Presición con librerías:', accuracy)
-
-
-plt.scatter(X_test['domain'], X_test['path'], c=y_pred)
-plt.xlabel('Dominio')
-plt.ylabel('Path')
-plt.savefig('knn_conlibs.jpg')
+# Mostrar gráfico
 plt.show()

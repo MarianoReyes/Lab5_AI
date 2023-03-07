@@ -46,13 +46,12 @@ y = data_res['status']
 selector = SelectKBest(chi2, k=10)
 selector.fit(X, y)
 
-selected_cols = X.columns[selector.get_support()].tolist()
-
 # guardar archivo limpiado en un archivo CSV
-data_res[selected_cols + ['status']].to_csv('dataset_phishing_cleaned.csv')
+data_res[["ip", "nb_qm", "ratio_digits_url", "ratio_digits_host", "shortest_word_host",
+          "longest_word_path", "phish_hints", "google_index"] + ['status']].to_csv('dataset_phishing_cleaned.csv')
 
 '''
-La métrica de desempeño principal que utilizaré es la precisión (accuracy), 
+La métrica de desempeño principal que utilizaremos es la precisión (accuracy), 
 que se define como la proporción de predicciones correctas en relación al 
 total de predicciones. La razón por la que elijo esta métrica es porque en 
 este problema de clasificación binaria, es importante que el modelo tenga una 
