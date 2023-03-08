@@ -13,12 +13,12 @@
 
 - La implementación que usa librerias es mejor por diferentes razones
 
-Primordialmente se puede ver la diferencia por los resultados, ya que el modelo con las librerias implementadas fue mucho mas eficiente y con un mejor resultado de accuracy. Los factores que afectan son:
+  Primordialmente se puede ver la diferencia por los resultados, ya que el modelo con las librerias implementadas fue mucho mas eficiente y con un mejor resultado de accuracy. Los factores que afectan son:
 
-Eficiencia: Sklearn está optimizado para la velocidad y la eficiencia, utilizando algoritmos avanzados y estructuras de datos para realizar cálculos complejos en una fracción del tiempo requerido por las implementaciones personalizadas.
+  Eficiencia: Sklearn está optimizado para la velocidad y la eficiencia, utilizando algoritmos avanzados y estructuras de datos para realizar cálculos complejos en una fracción del tiempo requerido por las implementaciones personalizadas.
 
-Escalabilidad: Sklearn está diseñado para escalar a grandes conjuntos de datos y manejar una amplia gama de tareas, desde el preprocesamiento de datos y la extracción de características hasta la selección y evaluación de modelos. Ya que con el realizado por nostros tuvimos que modificar aun mas la data para que se pudiera implementar. 
+  Escalabilidad: Sklearn está diseñado para escalar a grandes conjuntos de datos y manejar una amplia gama de tareas, desde el preprocesamiento de datos y la extracción de características hasta la selección y evaluación de modelos. Ya que con el realizado por nostros tuvimos que modificar aun mas la data para que se pudiera implementar. 
 
-Flexibilidad: Sklearn proporciona una amplia gama de modelos y algoritmos que se pueden personalizar y combinar fácilmente para satisfacer necesidades específicas, así como herramientas para la selección de características, validación cruzada, ajuste de hiperparámetros y más.
+  Flexibilidad: Sklearn proporciona una amplia gama de modelos y algoritmos que se pueden personalizar y combinar fácilmente para satisfacer necesidades específicas, así como herramientas para la selección de características, validación cruzada, ajuste de hiperparámetros y más.
 
-Robustez: Sklearn está bien probado y mantenido, con una gran comunidad de usuarios que ayuda a identificar y solucionar problemas rápidamente. Esto asegura que los modelos y algoritmos proporcionados sean robustos y confiables.
+  Robustez: Sklearn está bien probado y mantenido, con una gran comunidad de usuarios que ayuda a identificar y solucionar problemas rápidamente. Esto asegura que los modelos y algoritmos proporcionados sean robustos y confiables.
