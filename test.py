@@ -54,13 +54,21 @@ def svm_grad(alpha, y, K, C):
 def svm_train(K, y, C, learning_rate, num_epochs):
     n = K.shape[0]
     alpha = np.zeros(n)
+    batch_size = 10
     for epoch in range(num_epochs):
-        cost = svm_cost(alpha, y, K, C)
-        grad = svm_grad(alpha, y, K, C)
-        alpha = alpha - learning_rate * grad
-        alpha = np.where(
-            alpha > 0, alpha, 0
-        )  # Project onto the feasible solution space
+        if epoch %100 == 0: print("charging " + str((epoch/num_epochs) *100) + "%")
+
+        for i in range(0, n, batch_size):
+            X_batch = K[i:i+batch_size]
+            y_batch = y[i:i+batch_size]
+            # Calcular el gradiente para el batch actual
+            margin = y_batch * X_batch.dot(alpha)
+            hinge_loss_grad = -y_batch * (margin < 1)
+            grad = C * X_batch.T.dot(hinge_loss_grad) + alpha
+            # Actualizar los pesos
+            alpha = alpha - learning_rate * grad
+
+        #cost = svm_cost(alpha, y, K, C)
     w = (alpha * y) @ X_train
     return alpha, w
 
@@ -83,7 +91,7 @@ K_train = kernel_rbf(X_train, X_train, gamma)
 
 # Train the SVM model
 C = 1
-learning_rate = 0.01
+learning_rate = 0.1
 num_epochs = 1000
 alpha, w = svm_train(K_train, y_train, C, learning_rate, num_epochs)
 

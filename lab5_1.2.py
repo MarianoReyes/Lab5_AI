@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 # Cargar datos desde el archivo CSV
 data = pd.read_csv("dataset_phishing_cleaned.csv")
 
+#data = data[1:]
 # Dividir los datos en entrenamiento, validación y prueba
 train, validate, test = np.split(
     data.sample(frac=1, random_state=42), [int(0.8 * len(data)), int(0.9 * len(data))]
