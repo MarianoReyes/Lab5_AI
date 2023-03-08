@@ -22,6 +22,9 @@
   Flexibilidad: Sklearn proporciona una amplia gama de modelos y algoritmos que se pueden personalizar y combinar fácilmente para satisfacer necesidades específicas, así como herramientas para la selección de características, validación cruzada, ajuste de hiperparámetros y más.
 
 ## Al final de los tasks 1.1 y 1.2, responda como parte del readme de su repositorio (del task 1.1 use aquella implementación que lo haya hecho mejor según su criterio):
-###● ¿Cómo difirieron los grupos creados por ambos modelos?
-###● ¿Cuál de los modelos fue más rápido?
-###● ¿Qué modelo usarían?
+● ¿Cómo difirieron los grupos creados por ambos modelos?
+  - 
+● ¿Cuál de los modelos fue más rápido?
+  -
+● ¿Qué modelo usarían?
+  -
