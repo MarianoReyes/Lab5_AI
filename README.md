@@ -25,10 +25,10 @@
 ● ¿Cómo difirieron los grupos creados por ambos modelos?
   - 
 ● ¿Cuál de los modelos fue más rápido?
-  - El KNN con libreias fue un poco mas rapido que el SVM con librerias, y sin librerias el KNN fue mucho mas rapido y tuve mejor accuracy significativamente comparado con el SVM sin librerias.
-  - 
+   El KNN con libreias fue un poco mas rapido que el SVM con librerias, y sin librerias el KNN fue mucho mas rapido y tuve mejor accuracy significativamente comparado con el SVM sin librerias.
+  
 ● ¿Qué modelo usarían?
-  - Basandonos puramente en accuracy vemos como el algoritmos tiene un desempeño un poco mas alto. sin embargo dado que los datos parecen tener un número moderado de características (8 en total) y una cantidad razonable de datos de entrenamiento, KNN podría ser una buena opción.
+  Basandonos puramente en accuracy vemos como el algoritmos tiene un desempeño un poco mas alto. sin embargo dado que los datos parecen tener un número moderado de características (8 en total) y una cantidad razonable de datos de entrenamiento, KNN podría ser una buena opción.
 
   SVM también podría ser una buena opción, especialmente si hay una clara separación lineal entre los correos phishing y legítimos. En ese caso, se podría utilizar un kernel lineal para separar las dos clases.
 
