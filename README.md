@@ -20,5 +20,3 @@
   Escalabilidad: Sklearn está diseñado para escalar a grandes conjuntos de datos y manejar una amplia gama de tareas, desde el preprocesamiento de datos y la extracción de características hasta la selección y evaluación de modelos. Ya que con el realizado por nostros tuvimos que modificar aun mas la data para que se pudiera implementar. 
 
   Flexibilidad: Sklearn proporciona una amplia gama de modelos y algoritmos que se pueden personalizar y combinar fácilmente para satisfacer necesidades específicas, así como herramientas para la selección de características, validación cruzada, ajuste de hiperparámetros y más.
-
-  Robustez: Sklearn está bien probado y mantenido, con una gran comunidad de usuarios que ayuda a identificar y solucionar problemas rápidamente. Esto asegura que los modelos y algoritmos proporcionados sean robustos y confiables.
