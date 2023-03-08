@@ -4,14 +4,14 @@
 
 ### Repita los pasos para entrenar su modelo, pero ahora usando librerías y compare los resultados. ¿Cuál implementación fue mejor? ¿Por qué?
 
-- Es mejor la que usa librerias ya que estas son más exactas porque ya están diseñadas para implementar este tipo de algoritmos y hacer que sea más fácil su uso.
+ Es mejor la que usa librerias ya que estas son más exactas porque ya están diseñadas para implementar este tipo de algoritmos y hacer que sea más fácil su uso.
 
 
 ## Task 2
 
 ### Repita los pasos para entrenar su modelo, pero ahora usando librerías y compare los resultados. ¿Cuál implementación fue mejor? ¿Por qué? (Responda como parte del readme de su repositorio)
 
-- La implementación que usa librerias es mejor por diferentes razones
+  La implementación que usa librerias es mejor por diferentes razones
 
   Primordialmente se puede ver la diferencia por los resultados, ya que el modelo con las librerias implementadas fue mucho mas eficiente y con un mejor resultado de accuracy. Los factores que afectan son:
 
